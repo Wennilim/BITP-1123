@@ -1,0 +1,54 @@
+#ifndef OLOADING_H
+#define OLOADING_H
+
+class OLoading
+{
+private:
+	double loan;
+public:
+	OLoading();
+	OLoading(double);
+	~OLoading();
+	double Payment (int, double);
+	double Payment(int, double, double);
+};
+#endif
+
+OLoading::OLoading(double l)
+{
+	loan = 1;
+}
+
+OLoading::~OLoading() { }
+
+double OLoading::Payment(int month, double interest)
+{
+	return(loan / month * interest);
+}
+
+double OLoading::Payment(int year, double interest, double deposit)
+{
+	return (deposit - (loan / (12 * year)*interest));
+	
+}
+
+cout << "\n\nEnter Loan for Minah: ";
+	cin >> loan;
+
+	OLoading Minah(loan);
+
+	cout << "Enter loan duration in year: ";
+	cin >> year;
+	cout << "Enter interest rates: ";
+	cin >> interest;
+	cout << "Enter the deposit: ";
+	cin >> deposit;
+
+	pay = Minah.Payment(year, interest, deposit);
+
+	cout << "\nMinah Total payment per month: RM " << pay;
+	cout << endl;
+	cout << endl;
+	system("pause");
+	getchar();
+}
