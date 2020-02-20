@@ -1,0 +1,51 @@
+#ifndef CAR_H
+#define CAR_H
+
+class Car
+{
+private:
+	int numOfTyre;
+
+public:
+	Car(int tyre);
+	~Car();
+	void stop();
+};
+#endif
+
+
+
+#include<iostream>
+#include"Car.h"
+using namespace std;
+
+Car::Car(int tyre)
+{
+	numOfTyre = tyre;
+}
+
+Car::~Car() { }
+
+void Car::stop()
+{
+	cout << "Please stop now!" << numOfTyre << "tyre" << endl;
+}
+
+
+#include<iostream>
+#include"Car.h"
+using namespace std;
+
+void main()
+{
+	Car Kembara(5);
+	Car Kancil(4);
+
+	Kembara.stop();
+
+	Kancil.stop();
+	getchar();
+}
+
+
+
