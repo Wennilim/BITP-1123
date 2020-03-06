@@ -75,6 +75,19 @@ void main()
 	cout << "Insert a target,or 0 to stop: ";
 	cin >> target;
 	
+		do
+	{
+
+		found = BS.BinarySearch(BS.array, SIZE, target, BS.locationWanted);
+
+		if (found)
+			cout << "\n\tFound " << target << " at index " << BS.locationWanted << endl;
+		else
+			cout << "\n\tTarget not found " << endl;
+		cout << "\nInsert a target, or 0 to stop: ";
+		cin >> target;
+	} while (target != 0);
+	
 	getchar();
 
 }
