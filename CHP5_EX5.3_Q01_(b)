@@ -1,0 +1,109 @@
+//List.h
+#ifndef LIST_H
+#define LIST_H
+
+const int maxSize = 10;
+
+class List
+{
+public:
+	List();
+	~List();
+
+	int numOfitem();
+	void additem(char item);
+	void printitem();
+
+private:
+	char size;
+	char array[maxSize];
+};
+#endif
+.............................................................................................................................
+//List.cpp
+#include <iostream>
+using namespace std;
+#include "List.h"
+
+List::List()
+{
+	size = 0;
+}
+
+List::~List()
+{ }
+
+int List::numOfitem()
+{
+	return size;
+}
+
+void List::additem(char item)
+{
+	if (size == maxSize)
+	{
+		cout << "****** FULL **********\n";
+		return;
+	}
+	array[size] = item;
+	size++;
+}
+
+void List::printitem()
+{
+	for (char i = 0; i <= size; i++)
+		
+			cout << array[i] << "  ";
+			
+		
+}
+..............................................................................................................................
+//ListMain.cpp
+#include <iostream>
+using namespace std;
+#include "List.h"
+
+void main()
+{
+	char item;
+	List itemList;
+
+	cout << "Now there are: " << itemList.numOfitem() << " item in the list\n\n";
+	cout << "Enter a character: ";
+	cin >> item;
+
+	for (char i = 0; i < 10; i++)
+	{
+		itemList.additem(item);
+		cout << "Item " << item++ << " is added. ";
+
+	}
+	cout << "Now there are: " << itemList.numOfitem() << " item in the list\n\n";
+	cout << "The list are: \n";
+	itemList.printitem();
+}
+
+###########################################################################################################################
+Output:
+
+Now there are: 0 item in the list
+
+Enter a character: a
+Item a is added. Item b is added. Item c is added. Item d is added.
+Item e is added. Item f is added. Item g is added. Item h is added. 
+Item i is added. Item j is added.
+Now there are: 10 item in the list
+
+The list are:
+a  b  c  d  e  f  g  h  i  j  
+C:\Users\User\source\repos\Project7\Debug\Project7.exe (process 14572) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
+
