@@ -1,0 +1,135 @@
+//List.h
+#ifndef LIST_H
+#define LIST_H
+
+const int maxSize = 100;
+
+class List
+{
+public:
+	List();
+	~List();
+
+	int numberOfItem();
+	void addItem(int item);
+	void deleteItem();
+	void printItem();
+	
+
+private:
+
+	int size;
+	int array[maxSize];
+
+};
+#endif 
+..............................................................................................................................
+//List.cpp
+#include<iostream>
+using namespace std;
+#include "List.h"
+
+List::List()
+{
+	size = 0;
+}
+
+List::~List()
+{ }
+
+int List::numberOfItem()
+{
+	return size;
+}
+
+void List::addItem(int item)
+{
+	if (size == maxSize)
+	{
+		cout << "*******There is no place left******\n";
+		return;
+	}
+	array[size] = item;
+	size++;
+}
+
+void List::deleteItem()
+{
+	if (size == 0)
+	{
+		cout << "******No more item to be deleted*******\n";
+		return;
+	}
+	
+
+	for (int i = 0; i < 10; i++)
+	{
+		array[i] = array[i + 1];                              //DELETE FIRST ITEM FROM THE LIST.
+	}
+	size--;
+
+}
+
+
+void List::printItem()
+{
+	for (int i = 0; i < size; i++)
+		cout << array[i] << " ";
+	cout << "\n";
+}
+................................................................................................................................
+//ListMain.cpp
+#include<iostream>
+using namespace std;
+#include"List.h"
+
+void main()
+{
+	int item,position;
+	char answer;
+
+	List ItemList;
+	cout << "Now there are: " << ItemList.numberOfItem() << "item in the list\n\n";
+	cout << "Enter a digit : ";
+	cin >> item;
+
+	for (int i = 0; i < 10; i++)
+	{
+		ItemList.addItem(item);
+		cout << "item " << item++ << " is added. ";
+	}
+	cout << "Now there are : " << ItemList.numberOfItem() << "item in the list\n\n";
+	cout << "The list are: \n\n";
+	ItemList.printItem();
+
+	cout << "Now one item will be deleted. Press Y: ";
+	cin >> answer;
+
+	ItemList.deleteItem();
+	cout << "The updated List are: \n";
+	ItemList.printItem();
+	system("pause");
+}
+
+##################################################################################################################################
+
+Output:
+
+Now there are: 0 item in the list.
+
+Enter a digit : 1
+item 1 is added. item 2 is added. item 3 is added. 
+item 4 is added. item 5 is added. item 6 is added. 
+item 7 is added. item 8 is added. item 9 is added.
+item 10 is added. 
+Now there are : 10 item in the list
+
+The list are:
+
+1 2 3 4 5 6 7 8 9 10
+Now one item will be deleted. 
+Press Y: y
+The updated List are:
+2 3 4 5 6 7 8 9 10
+Press any key to continue . . .
+
