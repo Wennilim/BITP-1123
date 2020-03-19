@@ -1,0 +1,126 @@
+//List.h
+#ifndef LIST_H
+#define LIST_H
+
+const int maxSize = 20;
+
+class List
+{
+public:
+	List();
+	~List();
+
+	int numOfitem();
+	void additem(int item);
+	void printitem();
+
+private:
+	int size;
+	int array[maxSize];
+};
+#endif
+.................................................................................................................................
+//List.cpp
+#include <iostream>
+using namespace std;
+#include "List.h"
+
+List::List()
+{
+	size = 0;
+}
+
+List::~List()
+{ }
+
+int List::numOfitem()
+{
+	return size;
+}
+
+void List::additem(int item)
+{
+	if (size == maxSize)
+	{
+		cout << "****** FULL **********\n";
+		return;
+	}
+	array[size] = item;
+	size++;
+}
+
+void List::printitem()
+{
+	for (int i = 0; i <= size; i++)
+		if (i % 2 == 0)
+		{
+			cout << array[i] << "  ";
+			
+		}
+}
+............................................................................................................................
+//ListMain.cpp
+#include <iostream>
+using namespace std;
+#include "List.h"
+
+void main()
+{
+	int item;
+	List itemList;
+
+	cout << "Now there are: " << itemList.numOfitem() << " item in the list\n\n";
+	cout << "Enter a digit: ";
+	cin >> item;
+
+	for (int i = 0; i < 20; i++)
+	{
+		itemList.additem(item);
+		cout << "Item " << item++ << " is added. ";
+
+	}
+	cout << "Now there are: " << itemList.numOfitem() << " item in the list\n\n";
+	cout << "The list are: \n";
+	itemList.printitem();
+}
+########################################################################################################################
+Output:
+Now there are: 0 item in the list
+
+Enter a digit: 1
+Item 1 is added. Item 2 is added. Item 3 is added. Item 4 is added. Item 5 is added. Item 6 is added.
+Item 7 is added. Item 8 is added. Item 9 is added. Item 10 is added. Item 11 is added. Item 12 is added.
+Item 13 is added. Item 14 is added. Item 15 is added. Item 16 is added. Item 17 is added. Item 18 is added. 
+Item 19 is added. Item 20 is added.
+Now there are: 20 item in the list
+
+
+The list are:
+1  3  5  7  9  11  13  15  17  19  -858993460
+C:\Users\User\source\repos\Project7\Debug\Project7.exe (process 14576) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
