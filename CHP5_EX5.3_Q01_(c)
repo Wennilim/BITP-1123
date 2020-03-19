@@ -1,0 +1,128 @@
+//List.h
+#ifndef LIST_H
+#define LIST_H
+
+const int maxSize = 20;
+
+class List
+{
+public:
+	List();
+	~List();
+
+	int numOfitem();
+	void additem(int item, int position);
+	void printitem();
+
+private:
+	int size;
+	int array[maxSize];
+};
+#endif
+...................................................................................................................................
+//List.cpp
+#include <iostream>
+using namespace std;
+#include "List.h"
+
+List::List()
+{
+	size = 0;
+}
+
+List::~List()
+{ }
+
+int List::numOfitem()
+{
+	return size;
+}
+
+void List::additem(int item, int position)
+{
+	if (size == maxSize)
+	{
+		cout << "****** FULL **********\n";
+		return;
+	}
+	
+	if (position<0 || position>size)
+	{
+		cout << " INVALID POSITION! \n";
+		return;
+	}
+
+	for (int i = size; i <= position - 1; i++)
+		array[i - 1] = array[i];
+	array[position + 1] = item;
+	size++;
+
+
+}
+
+void List::printitem()
+{
+	for (int i = 0; i <= size; i++)
+		
+			cout << array[i] << "  ";
+			
+		
+}
+......................................................................................................................
+//ListMain.cpp
+#include <iostream>
+using namespace std;
+#include "List.h"
+
+void main()
+{
+	int item,position;
+	List itemList;
+
+	if (itemList.numOfitem() == 0)
+
+		cout << "there are no elements in this list" << endl;
+
+
+	for (int i = 0; i < 10; i++)
+		itemList.additem(i, i);
+
+	cout << "the forming of list after addition operation: \n" << endl;
+	itemList.printitem();
+	cout << "\n enter number to be added in the list: \n";
+	cin >> item;
+	cout << "\nenter position of the number: \n";
+	cin >> position;
+	itemList.additem(item, position);
+	cout << "\n The new list are: \n";
+	itemList.printitem();
+
+}
+############################################################################################################################
+Output:
+
+there are no elements in this list
+the forming of list after addition operation:
+
+  0  1  2  3  4  5  6  7  8  9
+  
+ enter number to be added in the list:
+5
+
+enter position of the number:
+0
+
+ The new list are:
+5  1  2  3  4  5  6  7  8  9  
+
+C:\Users\User\source\repos\Project7\Debug\Project7.exe (process 7948) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
+
