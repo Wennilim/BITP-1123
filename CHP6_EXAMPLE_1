@@ -86,3 +86,29 @@ void main()
 	x.printData();
 	system("pause");
 }
+
+
+#######################################################################################################################
+Output:
+
+Enter data: 5
+Enter data: 4
+Enter data: 3
+
+Number of item now is: 3The list are:
+3 4 5
+
+C:\Users\User\source\repos\chapter_06\Debug\chapter_06.exe (process 9040) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
+
+
+
+
