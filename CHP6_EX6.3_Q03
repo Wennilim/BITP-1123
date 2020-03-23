@@ -1,0 +1,212 @@
+//List.h
+#ifndef LIST_H
+#define LIST_H
+
+template <class DataType>
+class List
+{
+private:
+	class Node
+	{
+	public:
+		DataType data;
+		Node* link;
+	};
+	Node* pHead;
+	Node* pTail;
+	Node* pTemp;
+	int numItem;
+public:
+	List();
+	~List();
+	void AddToFront();
+	bool Traverse(DataType);
+	void DeleteMiddle(DataType);
+	void printData();
+	int NumberOfItem();
+};
+#endif
+
+template<class DataType>
+List<DataType>::List()
+{
+	numItem = 0;
+	pHead = 0;
+	pTail = 0;
+}
+
+template<class DataType>
+List<DataType>::~List() {}
+
+template<class DataType>
+void List<DataType>::AddToFront()
+{
+	DataType item;
+	Node* pNew = new Node;
+	cout << "Enter data: ";
+	cin >> item;
+	pNew->data = item;
+	pNew->link = pHead;
+	pHead = pNew;
+	numItem++;
+}
+
+template<class DataType>
+bool List<DataType>::Traverse(DataType del)
+{
+	if (numItem == 0)
+	{
+		cout << "There is no item in the list" << endl;
+	}
+	else
+	{
+		pTemp = pHead;
+		while (pTemp->data != del && pTemp->link != NULL)
+		{
+			pTemp = pTemp->link;
+		}
+		if (pTemp->data == del)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
+	}
+}
+
+template<class DataType>
+void List<DataType>::DeleteMiddle(DataType del)
+{
+	if (pTemp == pHead)
+	{
+		cout << "Cannot Delete first item.";
+		return;
+	}
+	Node* pBef = new Node;
+	pBef = pHead;
+	while (pBef->link != pTemp)
+	{
+		pBef = pBef->link;
+	}
+	pBef->link = pTemp->link;
+	delete pTemp;
+	numItem--;
+	cout << "One item is deleted.";
+}
+
+
+template<class DataType>
+void List<DataType>::printData()
+{
+	pTemp = pHead;
+	while (pTemp != 0)
+	{
+		cout << pTemp->data << " ";
+		pTemp = pTemp->link;
+	}
+	cout << "\n";
+}
+
+template<class DataType>
+int List<DataType>::NumberOfItem()
+{
+	return numItem;
+}
+
+
+.....................................................................................................................................
+
+
+//ListMain.cpp
+#include <iostream>
+#include <string>
+using namespace std;
+#include "List.h"
+
+int main()
+{
+	char del;
+	List<char> x;
+	for (int i = 1; i < 4; i++)
+	{
+		x.AddToFront();
+	}
+	cout << "\n\nNumber of Item Now : " << x.NumberOfItem();
+	cout << "\nThe list are : " << endl;
+	x.printData();
+	cout << "\n\nDelete item: ";
+	cin >> del;
+	if (x.Traverse(del))
+	{
+		x.DeleteMiddle(del);
+		cout << "\n\nNumber of Item Now : " << x.NumberOfItem();
+		cout << "\nThe new list:\n";
+		x.printData();
+	}
+	else {
+		cout << "Item is not found. Couldn't delete this item.";
+	}
+	return 0;
+}
+
+#########################################################################################################################
+
+Output:
+
+Enter data: 3
+Enter data: 2
+Enter data: 1
+
+
+Number of Item Now : 3
+The list are :
+1 2 3
+
+
+Delete item: 2
+One item is deleted.
+
+Number of Item Now : 2
+The new list:
+1 3
+
+C:\Users\User\source\repos\Project9\Debug\Project9.exe (process 1372) exited with code 0.
+Press any key to close this window . . .
+
+
+--OR--
+
+
+Enter data: A
+Enter data: B
+Enter data: C
+
+
+Number of Item Now : 3
+The list are :
+C B A
+
+
+Delete item: B
+One item is deleted.
+
+Number of Item Now : 2
+The new list:
+C A
+
+C:\Users\User\source\repos\Project9\Debug\Project9.exe (process 7932) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
+
+
+
