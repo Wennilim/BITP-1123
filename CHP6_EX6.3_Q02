@@ -1,0 +1,224 @@
+//List.h
+#ifndef LIST_H
+#define LIST_H
+
+template<class DataType>
+class List 
+{ private: 
+	class Node
+	{
+	public:
+		DataType data;
+		Node* link;
+	};
+
+	Node* pHead;
+	Node* pCurr;
+	Node* pTail;
+	int numItem;
+
+public:
+	List();
+	~List();
+	void AddToFront();
+	void AddInMiddle();
+	void AddAfter(DataType);
+	void printData();
+	int NumberOfItem();
+	bool Traverse(DataType);
+};
+#endif;
+
+template<class DataType>
+List<DataType>::List()
+{
+	pHead = 0;
+	pTail = NULL;
+	numItem = 0;
+};
+
+template<class DataType>
+List<DataType>::~List() { }
+
+template<class DataType>
+void List<DataType>::AddToFront()
+{
+	DataType item;
+	Node* pNew = new Node;
+	cout << "Enter data: ";
+	cin >> item;
+	pNew->data = item;
+	pNew->link = pHead;
+	pHead = pNew;
+	numItem++;
+};
+
+template<class DataType>
+void List<DataType>::AddInMiddle()
+{
+	DataType item;
+	Node* pNew = new Node;
+	cout << "Enter data: ";
+	cin >> item;
+	pNew->data = item;
+	pNew->link = NULL;
+	if (pHead == NULL)
+	{
+		pHead = pNew;
+		pTail = pNew;
+	}
+	else
+	{
+		pTail->link = pNew;
+		pTail = pTail->link;
+	}
+
+	numItem++;
+
+}
+
+template<class DataType>
+bool List<DataType>::Traverse(DataType target)
+{
+	if (numItem == 0)
+	{
+		cout << "There is no item in the list.\n";
+	}
+	else
+	{
+		pCurr = pHead;
+		while (pCurr->data != target && pCurr->link != NULL)
+		{
+			pCurr = pCurr->link;
+		}
+		if (pCurr->data == target)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+
+template<class DataType>
+void List<DataType>::AddAfter(DataType add)
+{
+	Node* pNew = new Node;
+	pNew->data = add;
+	pNew->link = pCurr->link;
+	pCurr->link = pNew;
+
+}
+
+
+template<class DataType>
+void List<DataType>::printData()
+{
+	pCurr = pHead;
+	while (pCurr != 0)
+	{
+		cout << pCurr->data << " ";
+		pCurr = pCurr->link;
+	}
+	cout << "\n";
+}
+
+
+template<class DataType>
+int List<DataType>::NumberOfItem()
+{
+	return numItem;
+}
+
+
+..................................................................................................................................
+
+//ListMain.cpp
+#include<iostream>
+#include<string>
+using namespace std;
+#include "List.h"
+
+int main()
+{
+	List<char>x;
+	char target, add;
+	for (int i = 1; i < 4; i++)
+	{
+		x.AddInMiddle();
+	}
+
+	cout << "\nNumber of item now: " << x.NumberOfItem();
+	cout << "\nThe list are: ";
+	x.printData();
+
+	cout << "\n Add after item: ";
+	cin >> target;
+	
+	if (x.Traverse(target))
+	{
+		cout << "Enter data: ";
+		cin >> add;
+		x.AddAfter(add);
+		cout << "The new list are: \n";
+		x.printData();
+
+	}
+	else
+	{
+		cout << "Item is not found. Couldn't add item to the list.\n";
+	}
+
+	return 0;
+}
+
+#################################################################################################################################
+Output 1 :
+
+Enter data: A
+Enter data: B
+Enter data: C
+
+Number of item now: 3
+The list are: A B C
+
+ Add after item: B
+Enter data: X
+The new list are:
+A B X C
+
+C:\Users\User\source\repos\Project10\Debug\Project10.exe (process 9696) exited with code 0.
+Press any key to close this window . . .
+
+
+....................................................................................................................................
+
+
+Output 2:
+
+Enter data: A
+Enter data: B
+Enter data: C
+
+Number of item now: 3
+The list are: A B C
+
+ Add after item: D
+Item is not found. Couldn't add item to the list.
+
+C:\Users\User\source\repos\Project10\Debug\Project10.exe (process 10744) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
+
+
+
+
