@@ -1,0 +1,175 @@
+//Stack.h
+#ifndef STACK_H
+#define STACK_H
+
+const int MaxSize = 10;
+
+template<class MyData>
+class Stack
+{
+private:
+	int Top;
+	MyData MyArray[MaxSize];
+public:
+	Stack();
+	~Stack();
+	void push(MyData);
+	void pop();
+	MyData TopStack();
+	bool underflow();
+	bool overflow();
+};
+#endif
+
+template<class MyData>
+Stack<MyData>::Stack()
+{
+	Top = -1;
+}
+
+template<class MyData>
+Stack<MyData>::~Stack() { }
+
+
+template<class MyData>
+void Stack<MyData>::push(MyData item)
+{
+	Top++;
+	MyArray[Top] = item;
+}
+
+template<class MyData>
+void Stack<MyData>::pop()
+{
+	Top--;
+}
+
+template<class MyData>
+MyData Stack<MyData>::TopStack()
+{
+	return MyArray[Top];
+}
+
+template<class MyData>
+bool Stack<MyData>::underflow()
+{
+	return (Top == -1);
+}
+template<class MyData>
+bool Stack<MyData>::overflow()
+{
+	return(Top == MaxSize - 1);
+}
+
+
+
+.............................................................................................................................
+//Utama.cpp
+#include<iostream>
+using namespace std;
+#include "Stack.h"
+
+void main()
+{
+	Stack<char>StackItem;
+	char item;
+	bool full = false;
+
+	do
+	{
+		cout << "\n Enter data: ";
+		cin >> item;
+
+		if (!StackItem.overflow())
+		{
+			cout << "Push item " << item << " now\n";
+			StackItem.push(item);
+		}
+		else
+		{
+			cout << "Stack is full: cannot push item " << item << endl;
+			full = true;
+		}
+	} while (!full);
+	
+	cout << "Now, we will top and pop the stack. \n";
+	
+	while (!StackItem.underflow())
+	{
+		cout << "Top is " << StackItem.TopStack() << " ";
+		cout << "Pop the stack now.";
+		StackItem.pop();
+	};
+
+
+	if (StackItem.underflow())
+	{
+		cout << "Stack is empty,cannot top and pop the stack. \n";
+
+	}
+
+	cout << endl;
+
+
+
+}
+
+############################################################################################################################
+Output:
+
+
+ Enter data: A
+Push item A now
+
+ Enter data: B
+Push item B now
+
+ Enter data: C
+Push item C now
+
+ Enter data: D
+Push item D now
+
+ Enter data: E
+Push item E now
+
+ Enter data: F
+Push item F now
+
+ Enter data: G
+Push item G now
+
+ Enter data: H
+Push item H now
+
+ Enter data: I
+Push item I now
+
+ Enter data: J
+Push item J now
+
+ Enter data: K
+Stack is full: cannot push item K.
+Now, we will top and pop the stack.
+Top is J Pop the stack now.
+Top is I Pop the stack now.
+Top is H Pop the stack now.
+Top is G Pop the stack now.
+Top is F Pop the stack now.
+Top is E Pop the stack now.
+Top is D Pop the stack now.
+Top is C Pop the stack now.
+Top is B Pop the stack now.
+Top is A Pop the stack now.
+Stack is empty,cannot top and pop the stack.
+
+
+C:\Users\User\source\repos\Project12\Debug\Project12.exe (process 11276) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
