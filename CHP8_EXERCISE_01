@@ -1,0 +1,157 @@
+//stack.h
+#ifndef STACK_H
+#define STACK_H
+
+const int SIZE = 10;
+
+template<class mydata>
+class stack
+{
+private:
+	int top;
+	mydata myarray[SIZE];
+
+public:
+	stack();
+	~stack();
+	void push(mydata);
+	void pop();
+	mydata topstack();
+	bool underflow();
+	bool overflow();
+};
+#endif
+
+template<class mydata>
+stack<mydata>::stack()
+{
+	top = -1;
+}
+
+template<class mydata>
+stack<mydata>::~stack() { }
+
+template<class mydata>
+void stack<mydata>::push(mydata item)
+{
+	top++;
+	myarray[top] = item;
+}
+
+template<class mydata>
+void stack<mydata>::pop()
+{
+	top--;
+	
+}
+
+template<class mydata>
+mydata stack<mydata>::topstack()
+{
+	return myarray[top];
+}
+
+template<class mydata>
+bool stack<mydata>::underflow()
+{
+	return (top == -1);
+}
+
+template<class mydata>
+bool stack<mydata>::overflow()
+{
+	return (top == SIZE-1);
+}
+
+..........................................................................................................................
+//Utama.cpp
+
+#include<iostream>
+using namespace std;
+#include "Stack.h"
+int main()
+{
+	stack<int>StackItem;
+	int item;
+	bool full = false;
+
+	
+	do
+	{
+		cout << "Enter a number or 0 to stop: ";
+		cin >> item;
+
+		if (item == 0)
+		{
+			break;
+		}
+		else if (!StackItem.overflow())
+		{
+
+			StackItem.push(item);
+		}
+		else
+		{
+
+			full = true;
+		}
+	
+	} while (!full);
+	
+	cout << endl;
+	
+	cout << "The data in reverse order:  ";
+
+	while (!StackItem.underflow())
+	{
+		
+		cout<<""<< StackItem.topstack() << " ";
+		
+		StackItem.pop();
+	};
+
+
+	return 0;
+}
+
+####################################################################################################################
+
+Output:
+
+Enter a number or 0 to stop: 1
+Enter a number or 0 to stop: 3
+Enter a number or 0 to stop: 5
+Enter a number or 0 to stop: 7
+Enter a number or 0 to stop: 0
+
+The data in reverse order:  7 5 3 1
+C:\Users\User\source\repos\Project14\Debug\Project14.exe (process 7020) exited with code 0.
+Press any key to close this window . . .
+
+
+--------OR-------------
+
+Enter a number or 0 to stop: 1
+Enter a number or 0 to stop: 3
+Enter a number or 0 to stop: 0
+
+The data in reverse order:  3 1
+C:\Users\User\source\repos\Project14\Debug\Project14.exe (process 8108) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
