@@ -1,0 +1,214 @@
+#ifndef STACKLL_H
+#define STACKLL_H
+
+template<class Mydata>
+
+struct Nod
+{
+	Mydata data;
+	Nod<Mydata>* next;
+};
+
+template<class Mydata>
+class stackLL
+{
+private:
+	int count;
+	Nod<Mydata>* top;
+
+public:
+	stackLL();
+	void push(Mydata &);
+	void pop();
+	bool empty();
+	Mydata TopStack();
+
+};
+#endif
+
+template<class Mydata>
+stackLL<Mydata>::stackLL()
+{
+	top = NULL;									                          //declare top of stack is null
+	count = 0;
+}
+
+template<class Mydata>
+void stackLL<Mydata>::push(Mydata &value)
+{
+	cout << "Push " << value << endl;
+	Nod<Mydata>* T = new Nod <Mydata>;                    //create new node
+	T->data = value;					                            // insert a value
+	T->next = top;						                            //set the next node
+	top = T;						                                	//set the top node
+	count++;
+
+}
+
+template<class Mydata>
+void stackLL<Mydata>::pop()
+{
+	if (!empty())
+	{
+		cout << "Pop " << top->data << endl;
+		Nod<Mydata>* temp = top;				                  //create a temporary node
+		top = top->next;						                      //set the next node
+		delete temp;							                        //delete the node
+		--count;
+	}
+	else
+	{
+		cout << "\nStack is empty,can't Top and Pop the stack\n ";
+	}
+}
+
+template<class Mydata>
+bool stackLL<Mydata>::empty()				        	//make stack is empty
+{
+	return(count == 0);
+}
+
+template<class Mydata>
+Mydata stackLL<Mydata>::TopStack()				// returns data in the top element
+{
+	if (empty())				                    //if the stack is empty
+	{
+		return -1;
+	}
+	else
+	{
+		return top->data;
+    }
+}
+
+
+
+
+................................................................................................................................
+
+//Utama.cpp
+#include<iostream>
+using namespace std;
+#include"Stack.h"
+void main()
+{
+	stackLL<char>mystack;
+	char i;
+	cout << "Please insert a character, 1 to Pop data or 0 to stop: ";
+	cin >> i;
+
+	while (i != '0')
+	{
+		if (i == '1')
+		{
+			mystack.pop();
+		}
+		else
+		{
+			mystack.push(i);
+		}
+
+		if (mystack.TopStack() != -1)
+		{
+			cout << "Top now is: " << mystack.TopStack();
+		}
+
+		cout << endl;
+
+		cout << "Please insert a character, 1 to Pop data or 0 to stop: ";
+		cin >> i;
+	}
+	cout << endl;
+
+
+}
+
+###########################################################################################################################
+
+Output:
+
+Please insert a character, 1 to Pop data or 0 to stop: a
+Push a
+Top now is: a
+Please insert a character, 1 to Pop data or 0 to stop: b
+Push b
+Top now is: b
+Please insert a character, 1 to Pop data or 0 to stop: c
+Push c
+Top now is: c
+Please insert a character, 1 to Pop data or 0 to stop: 1
+Pop c
+Top now is: b
+Please insert a character, 1 to Pop data or 0 to stop: 1
+Pop b
+Top now is: a
+Please insert a character, 1 to Pop data or 0 to stop: 1
+Pop a
+
+Please insert a character, 1 to Pop data or 0 to stop: 1
+
+Stack is empty,can't Top and Pop the stack
+
+Please insert a character, 1 to Pop data or 0 to stop: 0
+
+
+C:\Users\User\source\repos\Project13\Debug\Project13.exe (process 10880) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
