@@ -1,0 +1,168 @@
+// transform infix to postfix notation
+//Stack.h
+#ifndef STACK_H
+#define STACK_H
+
+const int maxsize = 10;
+
+template<class mydata>
+class stack
+{
+private:
+	int top;
+	mydata myarray[maxsize];
+
+public:
+	stack();
+	~stack();
+	void push(mydata);
+	void pop();
+	mydata topstack();
+	bool underflow();
+	bool overflow();
+};
+#endif
+
+template<class mydata>
+stack<mydata>::stack()
+{
+	top = -1;
+}
+
+template<class mydata>
+stack<mydata>::~stack()
+{
+
+}
+
+template<class mydata>
+void stack<mydata>::push(mydata item)
+{
+	top++;
+	myarray[top] = item;
+}
+
+template<class mydata>
+void stack<mydata>::pop()
+{
+	top--;
+}
+
+template<class mydata>
+mydata stack<mydata>::topstack()
+{
+	return myarray[top];
+}
+
+
+template<class mydata>
+bool stack<mydata>::underflow()
+{
+	return(top == -1);
+}
+
+template<class mydata>
+bool stack<mydata>::overflow()
+{
+	return(top == maxsize - 1);
+}
+
+
+.................................................................................................................................
+
+//Utama.cpp
+#include<iostream>
+#include<cmath>
+#include<string>
+using namespace std;
+#include"Stack.h"
+int main()
+{
+	stack<char>stackitem;
+	int index = 0;
+	char exp[50], top;
+
+	cout << "Enter an arithmetic expression: ";
+	cin.getline(exp, 50);
+	while (index < strlen(exp))
+	{
+		if (exp[index] == '(')
+		
+			stackitem.push(exp[index]);
+		
+		else if (exp[index] == ')')
+		{
+			top = stackitem.topstack();
+			while (top != '(')
+			{
+				cout << top;
+				stackitem.pop();
+				top = stackitem.topstack();
+			}
+		}
+		else if ((exp[index] == '+') || (exp[index] == '-'))
+		{
+			while ((!stackitem.underflow()) && (stackitem.topstack()!='('))
+			{
+				cout << stackitem.topstack();
+				stackitem.pop();
+			}
+			stackitem.push(exp[index]);
+		}
+		else if ((exp[index] == '*') || (exp[index] == '/') || (exp[index] == '%'))
+		{
+			top = stackitem.topstack();
+			if (!stackitem.underflow() || (top == '+') || (top == '-'))
+			{
+				stackitem.push(exp[index]);
+			}
+			else
+			{
+				cout << stackitem.topstack();
+				stackitem.pop();
+				stackitem.push(exp[index]);
+			}
+		}
+		else
+		
+			cout << exp[index];
+			index++;
+		
+	}
+	while (!stackitem.underflow())
+	{
+		if (stackitem.topstack() != '(')
+			cout << stackitem.topstack();
+		stackitem.pop();
+	}
+	cout << endl;
+	
+
+}
+
+################################################################################################################
+Output:
+
+Enter an arithmetic expression: (A+B*C)
+ABC*+
+
+C:\Users\User\source\repos\Project17\Debug\Project17.exe (process 4964) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
