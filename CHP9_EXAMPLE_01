@@ -1,0 +1,124 @@
+//CONVERTING DECIMAL_TO_BINARY
+//Stack.h
+#ifndef STACK_H
+#define STACK_H
+
+const int maxsize = 10;
+
+template<class mydata>
+class stack
+{
+private:
+	int top;
+	mydata myarray[maxsize];
+
+public:
+	stack();
+	~stack();
+	void push(mydata);
+	void pop();
+	mydata topstack();
+	bool underflow();
+	bool overflow();
+};
+#endif
+
+template<class mydata>
+stack<mydata>::stack()
+{
+	top = -1;
+}
+
+template<class mydata>
+stack<mydata>::~stack()
+{
+
+}
+
+template<class mydata>
+void stack<mydata>::push(mydata item)
+{
+	top++;
+	myarray[top] = item;
+}
+
+template<class mydata>
+void stack<mydata>::pop()
+{
+	top--;
+}
+
+template<class mydata>
+mydata stack<mydata>::topstack()
+{
+	return myarray[top];
+}
+
+
+template<class mydata>
+bool stack<mydata>::underflow()
+{
+	return(top == -1);
+}
+
+template<class mydata>
+bool stack<mydata>::overflow()
+{
+	return(top == maxsize - 1);
+}
+...............................................................................................................................
+
+//Utama.cpp
+
+#include<iostream>
+using namespace std;
+#include"Stack.h"
+int main()
+{
+	stack<int>mystack;
+	int number;
+	cout << "Enter an integer number: ";
+	cin >> number;
+
+	while (number > 0)
+	{
+		if (!mystack.overflow())
+		{
+			mystack.push(number % 2);
+			number = number / 2;
+		}
+		else
+		{
+			cout << "\nStack Overflow-terminate process ";
+			return -1;
+		}
+		
+	}
+
+	cout << "The equivalent binary number is: ";
+	while (!mystack.underflow())
+	{
+		cout << mystack.topstack();
+		mystack.pop();
+	}
+
+	cout << "\n";
+	return 0;
+}
+
+############################################################################################################################
+Output:
+Enter an integer number: 8
+The equivalent binary number is: 1000
+
+C:\Users\User\source\repos\Project17\Debug\Project17.exe (process 12368) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
+
