@@ -1,0 +1,131 @@
+//paranthesis matching
+//Stack.h
+#ifndef STACK_H
+#define STACK_H
+
+const int maxsize = 10;
+
+template<class mydata>
+class stack
+{
+private:
+	int top;
+	mydata myarray[maxsize];
+
+public:
+	stack();
+	~stack();
+	void push(mydata);
+	void pop();
+	mydata topstack();
+	bool underflow();
+	bool overflow();
+};
+#endif
+
+template<class mydata>
+stack<mydata>::stack()
+{
+	top = -1;
+}
+
+template<class mydata>
+stack<mydata>::~stack()
+{
+
+}
+
+template<class mydata>
+void stack<mydata>::push(mydata item)
+{
+	top++;
+	myarray[top] = item;
+}
+
+template<class mydata>
+void stack<mydata>::pop()
+{
+	top--;
+}
+
+template<class mydata>
+mydata stack<mydata>::topstack()
+{
+	return myarray[top];
+}
+
+
+template<class mydata>
+bool stack<mydata>::underflow()
+{
+	return(top == -1);
+}
+
+template<class mydata>
+bool stack<mydata>::overflow()
+{
+	return(top == maxsize - 1);
+}
+
+....................................................................................................................................
+//Utama.cpp
+
+#include<iostream>
+#include<string>
+using namespace std;
+#include"Stack.h"
+int main()
+{
+	stack<char>stackitem;
+	int index=0;
+	char exp[50];
+	cout << "Enter an arithmetic expression: ";
+	cin.getline(exp, 50);
+	while (index < strlen(exp))
+	{
+		switch (exp[index])
+		{
+		case'(': stackitem.push(exp[index]);
+			break;
+
+		case')': if (!stackitem.underflow())
+			stackitem.pop();
+			   else
+		{
+			cout << "Error: missing parenthesis" << endl;
+			return 0;
+		}
+		}
+		index++;
+	}
+	if (!stackitem.underflow())
+	{
+		cout << "Error: missing parenthesis" << endl;
+		return 0;
+	}
+
+}
+#################################################################################################################################
+Output:
+
+Enter an arithmetic expression: ((a+b)/c)
+
+C:\Users\User\source\repos\Project17\Debug\Project17.exe (process 6196) exited with code 0.
+Press any key to close this window . . .
+
+
+-----------------OR--------------------
+
+Enter an arithmetic expression: ((a+b)/c
+Error: missing parenthesis
+
+C:\Users\User\source\repos\Project17\Debug\Project17.exe (process 244) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
