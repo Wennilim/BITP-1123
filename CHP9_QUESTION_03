@@ -1,0 +1,159 @@
+//convertion BINARY TO DECIMAL
+//Stack.h
+#ifndef STACK_H
+#define STACK_H
+
+const int maxsize = 10;
+
+template<class mydata>
+class stack
+{
+private:
+	int top;
+	mydata myarray[maxsize];
+
+public:
+	stack();
+	~stack();
+	void push(mydata);
+	void pop();
+	mydata topstack();
+	bool underflow();
+	bool overflow();
+	int decimal();
+};
+#endif
+
+template<class mydata>
+stack<mydata>::stack()
+{
+	top = -1;
+}
+
+template<class mydata>
+stack<mydata>::~stack()
+{
+
+}
+
+template<class mydata>
+void stack<mydata>::push(mydata item)
+{
+	top++;
+	myarray[top] = item;
+}
+
+template<class mydata>
+void stack<mydata>::pop()
+{
+	top--;
+}
+
+template<class mydata>
+mydata stack<mydata>::topstack()
+{
+	return myarray[top];
+}
+
+
+template<class mydata>
+bool stack<mydata>::underflow()
+{
+	return(top == -1);
+}
+
+template<class mydata>
+bool stack<mydata>::overflow()
+{
+	return(top == maxsize - 1);
+}
+
+template<class mydata>
+int stack<mydata>::decimal()      // add a new function ( to return top ) so that can count from backward including '0'
+{
+	return (top);
+}
+
+.................................................................................................................................
+//Main.cpp
+#include<iostream>
+#include<cmath>
+using namespace std;
+#include"Stack.h"
+int main()
+{
+	stack<int>mystack;
+	int number;
+	number = 0;
+
+	cout << "Enter a binary number: ";
+	cin >> number;
+	
+
+	
+
+	while (number != 0)
+	{
+		if (!mystack.overflow())
+		{
+			 mystack.push(number % 10);
+			number =number/ 10;
+		}
+		else
+		{
+			cout << "\nStack Overflow-terminate process ";
+			return -1;
+		}
+
+	}
+	
+
+	cout << "The equivalent decimal number is: ";
+	while (!mystack.underflow())
+	{
+	
+		number = number + mystack.topstack() * pow(2, mystack.decimal() );  // 放decimal() function 来取代任何unknown \\（也是 power of 的意思）
+		
+		mystack.pop();
+	}
+
+	cout << number;
+	cout << "\n";
+	
+	return 0;
+}
+#######################################################################################################################
+
+Output:
+
+Enter a binary number: 1000
+The equivalent decimal number is: 8
+
+C:\Users\User\source\repos\Project19\Debug\Project19.exe (process 3476) exited with code 0.
+Press any key to close this window . . .
+
+
+-----------OR---------------
+
+Enter a binary number: 1010
+The equivalent decimal number is: 10
+
+C:\Users\User\source\repos\Project19\Debug\Project19.exe (process 16184) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
