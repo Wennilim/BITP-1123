@@ -1,0 +1,233 @@
+//Implementation of queue by using array
+//Queue.h
+#ifndef QUEUE_H
+#define QUEUE_H
+
+const int SIZE = 5;
+template<class mydata>
+class queue
+{
+private:
+	int front;
+	int rear;
+	int count;
+	mydata array[SIZE];
+
+public:
+	queue();
+	void enqueue(mydata);
+	void dequeue();
+	mydata queuefront();
+	mydata queuerear();
+	bool empty();
+	
+};
+#endif
+
+template<class mydata>
+queue<mydata>::queue()
+{
+	front = -1;
+	rear = -1;
+	count = 0;
+}
+
+template<class mydata>
+void queue<mydata>::enqueue(mydata value)
+{
+	if (count < SIZE)
+	{
+		cout << "Insert " << value << " into queue. \n ";
+		rear++;
+		if (rear == SIZE)
+			rear = 0;
+		if (count == 0)
+			front = 0;
+		array[rear] = value;
+		count++;
+
+	}
+	else
+		cout << "OVERFLOW! ";
+}
+
+template<class mydata>
+void queue<mydata>::dequeue()
+{
+	if (count == 0)
+		cout << "UNDERFLOW! ";
+	else
+	{
+		cout << "Dequeue: " << array[front];
+		front++;
+		if (front == SIZE)
+			front = 0;
+		if (count == 1)
+			rear = front = -1;
+		count--;
+	}
+}
+
+
+template<class mydata>
+mydata queue<mydata>::queuefront()
+{
+	if (empty())
+		return false;
+	else
+		return array[front];
+
+}
+
+
+template<class mydata>
+mydata queue<mydata>::queuerear()
+{
+	if (empty())
+		return false;
+	else
+		return array[rear];
+
+}
+
+template<class mydata>
+bool queue<mydata>::empty()
+{
+	return(count == 0);
+}
+
+
+........................................................................................................................
+//Utama.cpp
+#include<iostream>
+using namespace std;
+#include"Queue.h"
+
+int main()
+{
+	queue<char>one;
+	char i;
+	cout << "Please insert a data,1 to DEQUEUE or 0 to STOP: ";
+	cin >> i;
+
+	while (i != '0')
+	{
+		if (i == '1')
+			one.dequeue();
+		else
+			one.enqueue(i);
+		if (!one.empty())
+		{
+			cout << "Queue front now is:" << one.queuefront()<<endl;
+				cout << "Queue rear now is:" << one.queuerear()<<endl;
+		}
+
+		cout << endl;
+
+		cout << "Please insert a data,1 to DEQUEUE or 0 to STOP: ";
+		cin >> i;
+
+	}
+	
+	cout << endl;
+	return 0;
+}
+
+##################################################################################################################
+Output:
+
+Please insert a data,1 to DEQUEUE or 0 to STOP: A
+Insert A into queue.
+ Queue front now is:A
+Queue rear now is:A
+
+Please insert a data,1 to DEQUEUE or 0 to STOP: B
+Insert B into queue.
+ Queue front now is:A
+Queue rear now is:B
+
+Please insert a data,1 to DEQUEUE or 0 to STOP: C
+Insert C into queue.
+ Queue front now is:A
+Queue rear now is:C
+
+Please insert a data,1 to DEQUEUE or 0 to STOP: D
+Insert D into queue.
+ Queue front now is:A
+Queue rear now is:D
+
+Please insert a data,1 to DEQUEUE or 0 to STOP: E
+Insert E into queue.
+ Queue front now is:A
+Queue rear now is:E
+
+Please insert a data,1 to DEQUEUE or 0 to STOP: 1
+Dequeue: AQueue front now is:B
+Queue rear now is:E
+
+Please insert a data,1 to DEQUEUE or 0 to STOP: 1
+Dequeue: BQueue front now is:C
+Queue rear now is:E
+
+Please insert a data,1 to DEQUEUE or 0 to STOP: F
+Insert F into queue.
+ Queue front now is:C
+Queue rear now is:F
+
+Please insert a data,1 to DEQUEUE or 0 to STOP: 0
+
+
+C:\Users\User\source\repos\Project20\Debug\Project20.exe (process 11408) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
