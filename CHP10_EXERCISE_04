@@ -1,0 +1,191 @@
+//Queuell.h
+#ifndef QUEUELL_H
+#define QUEUELL_H
+const int SIZE = 100;
+
+
+template<class mydata>
+class queuell
+{
+private:
+	int front;
+	int rear;
+	int count;
+	mydata array[SIZE];
+
+public:
+	queuell();
+	void enqueue(mydata);
+	void dequeue();
+	mydata queuefront();
+	bool empty();
+
+};
+#endif
+
+template<class mydata>
+queuell<mydata>::queuell()
+{
+	front = -1;
+	rear = -1;
+	count = 0;
+}
+
+template<class mydata>
+void queuell<mydata>::enqueue(mydata value)
+{
+	
+	if (count < SIZE)
+	{
+		cout << "\n     Queue number: " << value << endl;
+		rear++;
+		if (rear == SIZE)
+			rear = 0;
+		if (count == 0)
+			front = 0;
+		array[rear] = value;
+		count++;
+
+	}
+}
+
+template<class mydata>
+void queuell<mydata>::dequeue()
+{
+	if (count == 0)
+
+		cout << "\n     Queue is empty."<<endl;
+
+	else
+	{
+		cout << "\n     Calling queue number: " << array[front]<<endl;
+		front++;
+		if (front == SIZE)
+			front = 0;
+		if (count == 1)
+			rear = front = -1;
+		count--;
+		
+	}
+}
+
+
+template<class mydata>
+mydata queuell<mydata>::queuefront()
+{
+	if (empty())
+		return false;
+	else
+		return array[front];
+}
+
+
+
+template<class mydata>
+bool queuell<mydata>::empty()
+{
+	return(count == 0);
+}
+
+.........................................................................................................................
+//Main.cpp
+#include<iostream>
+using namespace std;
+#include"Queuell.h"
+
+int main()
+{
+	queuell<int>myql;
+	int i,x=1;
+
+	cout << "      ZIMY BANK         "<<endl;
+	cout << "1: Get a queue number\n";
+	cout << "2: Next customer\n";
+	cout << "3: Exit\n";
+	cin >> i;
+
+
+	while (i != 3)
+	{
+		if (i == 1)
+			myql.enqueue(x++);
+		if(i==2)
+			myql.dequeue();
+
+		cout << endl;
+
+		cout << "1: Get a queue number\n";
+		cout << "2: Next customer\n";
+		cout << "3: Exit\n";
+		cin >> i;
+	}
+
+	cout << endl;
+	return 0;
+}
+
+#################################################################################################################
+Output:
+
+      ZIMY BANK
+1: Get a queue number
+2: Next customer
+3: Exit
+1
+
+     Queue number: 1
+
+1: Get a queue number
+2: Next customer
+3: Exit
+1
+
+     Queue number: 2
+
+1: Get a queue number
+2: Next customer
+3: Exit
+2
+
+     Calling queue number: 1
+
+1: Get a queue number
+2: Next customer
+3: Exit
+1
+
+     Queue number: 3
+
+1: Get a queue number
+2: Next customer
+3: Exit
+2
+
+     Calling queue number: 2
+
+1: Get a queue number
+2: Next customer
+3: Exit
+2
+
+     Calling queue number: 3
+
+1: Get a queue number
+2: Next customer
+3: Exit
+2
+
+     Queue is empty.
+
+1: Get a queue number
+2: Next customer
+3: Exit
+3
+
+
+C:\Users\User\source\repos\Project23\Debug\Project23.exe (process 3468) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
