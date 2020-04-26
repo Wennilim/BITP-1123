@@ -1,0 +1,171 @@
+//QueueLL.h
+#ifndef QUEUELL_H
+#define QUEUELL_H
+
+template<class mydata>
+struct nod
+{
+		mydata data;
+		nod < mydata >* next;
+};
+
+template<class mydata>
+class queuell
+{
+private:
+	nod<mydata>* front;
+	nod<mydata>* rear;
+	int count;
+
+public:
+	queuell();
+	void enqueue(mydata);
+	void dequeue();
+	mydata queuefront();
+	mydata queuerear();
+	bool empty();
+
+};
+#endif
+
+template<class mydata>
+queuell<mydata>::queuell()
+{
+	front = NULL;
+	rear = NULL;
+	count = 0;
+}
+
+template<class mydata>
+void queuell<mydata>::enqueue(mydata value)
+{
+	nod<mydata>* T = new nod<mydata>;
+	cout << "Enqueue " << value << " into the queue.\n";
+	T->data = value;
+	T->next = NULL;
+
+	if (!empty())
+		rear->next = T;
+	else
+		front = T;
+	count++;
+	rear = T;
+	
+}
+
+template<class mydata>
+void queuell<mydata>::dequeue()
+{
+	if (count == 0)
+	
+		cout << "UNDERFLOW.";
+	
+	else
+	{
+		cout << "Dequeue: " << front->data<<endl;
+		nod<mydata>* temp = front;
+		if (count == 1)
+			rear = front = NULL;
+		else
+			front = front->next;
+		count--;
+		delete temp;
+	}
+}
+
+
+template<class mydata>
+mydata queuell<mydata>::queuefront()
+{
+	if (empty())
+		return false;
+	else
+		return front->data;
+}
+
+template<class mydata>
+mydata queuell<mydata>::queuerear()
+{
+	if (empty())
+		return false;
+	else
+		return rear->data;
+}
+
+template<class mydata>
+bool queuell<mydata>::empty()
+{
+	return(count == 0);
+}
+
+......................................................................................................................
+//Utama.cpp
+#include<iostream>
+using namespace std;
+#include"QueueLL.h"
+
+int main()
+{
+	queuell<char>myql;
+	char i;
+	cout << "Please insert a data, 1 to Dequeue data or 0 to stop:";
+	cin >> i;
+
+	while (i != '0')
+	{
+		if (i == '1')
+			myql.dequeue();
+		else
+			myql.enqueue(i);
+
+		if (!myql.empty())
+		{
+			cout << "Queue front now is: " << myql.queuefront()<<endl;
+			cout << "Queue rear now is: " << myql.queuerear()<<endl;
+		}
+		cout << endl;
+		cout << "Please insert a data, 1 to Dequeue data or 0 to stop:";
+		cin >> i;
+	}
+
+	cout << endl;
+	return 0;
+}
+####################################################################################################################
+Output:
+Please insert a data, 1 to Dequeue data or 0 to stop:A
+Enqueue A into the queue.
+Queue front now is: A
+Queue rear now is: A
+
+Please insert a data, 1 to Dequeue data or 0 to stop:B
+Enqueue B into the queue.
+Queue front now is: A
+Queue rear now is: B
+
+Please insert a data, 1 to Dequeue data or 0 to stop:C
+Enqueue C into the queue.
+Queue front now is: A
+Queue rear now is: C
+
+Please insert a data, 1 to Dequeue data or 0 to stop:1
+Dequeue: A
+Queue front now is: B
+Queue rear now is: C
+
+Please insert a data, 1 to Dequeue data or 0 to stop:1
+Dequeue: B
+Queue front now is: C
+Queue rear now is: C
+
+Please insert a data, 1 to Dequeue data or 0 to stop:1
+Dequeue: C
+
+Please insert a data, 1 to Dequeue data or 0 to stop:1
+UNDERFLOW.
+Please insert a data, 1 to Dequeue data or 0 to stop:0
+
+
+C:\Users\User\source\repos\Project22\Debug\Project22.exe (process 3532) exited with code 0.
+Press any key to close this window . . .
+
