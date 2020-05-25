@@ -1,0 +1,248 @@
+//Tree.h
+#ifndef TREE_H
+#define TREE_H
+
+template<class t>
+class tree
+{
+private:
+	class node
+	{
+	public:
+		t info;
+		node* left;
+		node*right;
+	};
+	node* root;
+public:
+	tree();
+	~tree();
+	bool isempty() const;
+	int numofnode() const;
+	int countnode(node* root);
+	void insertitem(t);
+	void insert(node*& root, t item);
+	void deleteitem(t);
+	void Delete(node*& root, t item);
+	void deletenode(node*& root);
+	void retrieveitem(t&, bool&);
+	void retrieve(node* root, t item, bool& found);
+	void getpredecessor(node*& root, t& data);
+	void printtree();
+	void print(node* root);
+};
+#endif
+
+template<class t>
+tree<t>::tree()
+{
+	root = NULL;
+}
+
+template<class t>
+tree<t>::~tree()
+{
+
+}
+
+template<class t>
+bool tree<t>::isempty()const
+{
+	if (root == NULL)
+		return true;
+	else
+		return false;
+}
+
+template<class t>
+int tree<t>::numofnode() const
+{
+	return countnode(root);
+}
+
+template<class t>
+int tree<t>::countnode(node* root)
+{
+	if (root == NULL)
+		return 0;
+	else
+		return countnode(root->left)
+		+ countnode(root->right) + 1;
+}
+
+template<class t>
+void tree<t>::insertitem(t item)
+{
+	insert(root, item);
+}
+
+template<class t>
+void tree<t>::insert(node*& root, t item)
+{
+	if (root == NULL)
+	{
+		root = new node;
+		root->right = NULL;
+		root->left = NULL;
+		root->info = item;
+	}
+	else if (item < root->info)
+		insert(root->left, item);
+	else
+		insert(root->right, item);
+}
+
+template<class t>
+void tree<t>::deleteitem(t item)
+{
+	Delete(root, item);
+}
+
+template<class t>
+void tree<t>::Delete(node*& root, t item)
+{
+	if (root == NULL) return;
+	if (item < root->info)
+		Delete(root->left, item);
+	else if (item > root->info)
+		Delete(root->right, item);
+	else
+		deletenode(root);
+}
+
+template<class t>
+void tree<t>::deletenode(node*& root)
+{
+	t data;
+	node*temptr;
+	temptr = root;
+	if (root->left = NULL && root->right == NULL)
+	{
+		root = NULL;
+		delete temptr;
+	}
+	else if (root->left == NULL)
+	{
+		root = root->right;
+		delete temptr;
+	}
+	else if (root->right == NULL)
+	{
+		root = root->left;
+		delete temptr;
+	}
+	else
+	{
+		getpredecessor(root->left, data);
+		root->info = data;
+		Delete(root->left, data);
+	}
+}
+
+template<class t>
+void tree<t>::retrieveitem(t&item, bool& found)
+{
+	retrieve(root, item, found);
+}
+
+template<class t>
+void tree<t>::retrieve(node* root, t item, bool& found)
+{
+	if (root == NULL)
+		found = false;
+	else if (item < root->info)
+		retrieve(root->right, item, found);
+	else
+		found = true;
+}
+
+template<class t>
+void tree<t>::getpredecessor(node*& root, t& data)
+{
+	node* ptree = root;
+	while (ptree->right != NULL)
+		ptree = ptree->right;
+	data = ptree->info;
+
+}
+
+template<class t>
+void tree<t>::printtree()
+{
+	print(root);
+
+}
+
+template<class t>
+void tree<t>::print(node* root)
+{
+	if (root != NULL)
+	{
+		print(root->left);
+		cout << root->info << " ";
+		print(root->right);
+	}
+
+}
+
+
+
+..............................................................................................................................
+
+//main.cpp
+#include<iostream>
+using namespace std;
+#include "Tree.h"
+
+
+int main()
+{
+	tree<int>BST;
+	int itemI, itemD, itemR;
+	bool found = true;
+	cout << " Input data or 0 to stop: " << endl;
+	cin >> itemI;
+
+
+	while (itemI != 0)
+	{
+		BST.insertitem(itemI);
+			cin >> itemI;
+	}
+	cout << " Input data to be deleted: " << endl;
+	cin >> itemD;
+	if (BST.isempty())
+		cout << "empty tree =)" << endl;
+	else
+		BST.deleteitem(itemD);
+	cout << "\n Input data to be searched: ";
+	cin >> itemR;
+	BST.retrieveitem(itemR, found);
+	if (found == true)
+		cout << "Data found!!!!!!!!!!!" << endl;
+	else
+		cout << "Data not found!!!!!!!!1" << endl;
+	cout << "Data in order" << endl;
+	BST.printtree();
+	return 0;
+}
+
+
+#########################################################################################################
+Output:
+ Input data or 0 to stop:
+10 20 30 40 50 0
+ Input data to be deleted:
+0
+
+ Input data to be searched: 10
+Data found!!!!!!!!!!!
+Data in order
+10 20 30 40 50
+C:\Users\User\source\repos\Project24\Debug\Project24.exe (process 4180) exited with code 0.
+Press any key to close this window . . .
+
+
+
+
+
